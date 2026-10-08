@@ -7,6 +7,10 @@ import type { ConversationResponse } from "../types";
 
 const BASE_URL = "/api";
 
+export interface ApiClientError extends Error {
+  status?: number;
+}
+
 async function postJSON<T>(url: string, body: unknown): Promise<T> {
   const res = await fetch(url, {
     method: "POST",
@@ -14,26 +18,52 @@ async function postJSON<T>(url: string, body: unknown): Promise<T> {
     body: JSON.stringify(body),
   });
   if (!res.ok) {
-    throw new Error(`Request to ${url} failed with status ${res.status}`);
+    const error: ApiClientError = new Error(`Request to ${url} failed with status ${res.status}`);
+    error.status = res.status;
+    throw error;
   }
   return res.json() as Promise<T>;
 }
 
 export const api = {
-  sendMessage(sessionId: string, message: string): Promise<ConversationResponse> {
-    return postJSON(`${BASE_URL}/chat`, { session_id: sessionId, message });
+  sendMessage(sessionId: string | undefined, message: string): Promise<ConversationResponse> {
+    const body: { message: string; session_id?: string } = { message };
+    if (sessionId) {
+      body.session_id = sessionId;
+    }
+    return postJSON(`${BASE_URL}/chat`, body);
   },
 
-  getState(sessionId: string): Promise<ConversationResponse> {
-    return fetch(`${BASE_URL}/state/${sessionId}`).then((r) => r.json());
+  async getState(sessionId: string): Promise<ConversationResponse> {
+    const res = await fetch(`${BASE_URL}/state/${sessionId}`);
+    if (!res.ok) {
+      const error: ApiClientError = new Error(`Request to ${BASE_URL}/state/${sessionId} failed with status ${res.status}`);
+      error.status = res.status;
+      throw error;
+    }
+    return res.json();
   },
 
   correctField(sessionId: string, fieldName: string, value: unknown): Promise<ConversationResponse> {
     return postJSON(`${BASE_URL}/correct`, { session_id: sessionId, field_name: fieldName, value });
   },
 
-  resetSession(sessionId: string): Promise<ConversationResponse> {
-    return fetch(`${BASE_URL}/reset/${sessionId}`, { method: "POST" }).then((r) => r.json());
+  async resetSession(sessionId: string): Promise<ConversationResponse> {
+    const res = await fetch(`${BASE_URL}/reset/${sessionId}`, { method: "POST" });
+    if (!res.ok) {
+      const error: ApiClientError = new Error(`Request to reset ${sessionId} failed with status ${res.status}`);
+      error.status = res.status;
+      throw error;
+    }
+    return res.json();
+  },
+
+  async deleteSession(sessionId: string): Promise<void> {
+    const res = await fetch(`${BASE_URL}/sessions/${sessionId}`, { method: "DELETE" });
+    if (!res.ok) {
+      const error: ApiClientError = new Error(`Request to delete ${sessionId} failed with status ${res.status}`);
+      error.status = res.status;
+      throw error;
+    }
   },
 };
-

@@ -10,6 +10,8 @@ node_modules/
 dist/
 build/
 .vite/
+*.tsbuildinfo
+*-output.txt
 
 # IDE files & environment secrets
 .idea/

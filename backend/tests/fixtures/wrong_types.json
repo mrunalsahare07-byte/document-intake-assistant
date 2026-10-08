@@ -1,0 +1,8 @@
+{
+  "proposal": {
+    "covers_worldwide_assets": "not_a_boolean_value",
+    "children_names": 12345
+  },
+  "assistant_response": "Recording with invalid types.",
+  "requires_clarification": false
+}

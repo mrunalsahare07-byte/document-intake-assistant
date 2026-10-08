@@ -1,0 +1,7 @@
+{
+  "proposal": {
+    "full_name": "Bruce Wayne"
+  },
+  "assistant_response": "I detected ambiguity between multiple executor candidates. Please clarify who you would like to appoint.",
+  "requires_clarification": true
+}

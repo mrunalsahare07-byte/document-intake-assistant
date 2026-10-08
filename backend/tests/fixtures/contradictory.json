@@ -1,0 +1,11 @@
+{
+  "proposal": {
+    "has_children": false,
+    "children_names": [
+      "Dick Grayson",
+      "Damian Wayne"
+    ]
+  },
+  "assistant_response": "I noticed a contradiction: you indicated having no children, but child names were also mentioned. Could you please clarify?",
+  "requires_clarification": true
+}

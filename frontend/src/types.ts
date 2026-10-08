@@ -1,39 +1,50 @@
-export interface Beneficiary {
-  name: string;
-  relationship: string;
-  allocation_percent?: number | null;
+export interface Executor {
+  name: string | null;
+  relationship: string | null;
 }
-export interface Guardian {
-  name: string;
-  relationship: string;
-}
-export type MaritalStatus = "single" | "married" | "divorced" | "widowed" | "partnered";
-export type FinalArrangement = "burial" | "cremation" | "undecided";
+
+export type FieldStatus = "unknown" | "unconfirmed" | "confirmed";
+
 export interface PersonalWishesState {
   full_name: string | null;
-  date_of_birth: string | null;
-  marital_status: MaritalStatus | null;
-  beneficiaries: Beneficiary[];
-  guardians_for_children: Guardian[];
-  final_arrangement: FinalArrangement | null;
-  final_arrangement_details: string | null;
-  organ_donor: boolean | null;
-  personal_message: string | null;
-  special_instructions: string | null;
-  executor_name: string | null;
-  executor_relationship: string | null;
+  home_address: string | null;
+  covers_worldwide_assets: boolean | null;
+  has_children: boolean | null;
+  children_names: string[];
+  executor: Executor;
+  has_specific_gifts?: boolean | null;
+  specific_gifts: string[];
+  additional_wishes: string | null;
+  field_statuses?: Record<string, FieldStatus>;
 }
+
+// Backward compatibility alias for components
+export type IntakeState = PersonalWishesState;
+
 export interface ChatTurn {
   role: "user" | "assistant";
   content: string;
+  text?: string;
+  timestamp?: string;
+  validatedFields?: string[];
 }
+
+export interface ApiError {
+  code: string;
+  message: string;
+}
+
 export interface ConversationResponse {
-  session_id: string;
-  assistant_message: string;
+  session_id?: string;
+  assistant_message?: string;
   state: PersonalWishesState;
   history: ChatTurn[];
   is_complete: boolean;
   missing_fields: string[];
+  document?: string;
   document_markdown: string;
   disclaimer: string;
+  error?: ApiError | null;
 }
+
+export type StatusType = "connected" | "processing" | "draft" | "confirmed" | "needs_review" | "error" | "saved" | "idle";

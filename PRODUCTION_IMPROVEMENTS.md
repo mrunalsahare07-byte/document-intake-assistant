@@ -37,6 +37,15 @@ made:
 - **Environment configuration**: Externalize the API base URL via
   environment variables instead of a hardcoded `/api` proxy path.
 
+## DevOps
+- **CI/CD pipeline**: Automated linting, testing, and deployment (GitHub
+  Actions or similar).
+- **Containerization**: Dockerfiles + docker-compose for consistent local
+  and production environments.
+- **Monitoring**: Application performance monitoring and health checks
+  beyond the basic `/health` endpoint.
+- **Secrets management**: Store LLM API keys in a secrets manager
+  (e.g. Azure Key Vault, AWS Secrets Manager) rather than plain env files.
 
 ## Data & Compliance
 - **Data retention policy**: Since this collects sensitive personal

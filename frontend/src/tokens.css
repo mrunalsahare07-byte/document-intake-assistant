@@ -1,0 +1,97 @@
+:root {
+  /* Surface Tokens */
+  --background: #F9FAFB;
+  --surface: #FFFFFF;
+  --surface-2: #F9FAFB;
+  --surface-3: #F3F4F6;
+  --surface-hover: #F3F4F6;
+  --surface-active: #E5E7EB;
+
+  /* Border Tokens */
+  --border: #E5E7EB;
+  --border-subtle: #F3F4F6;
+  --border-strong: #D1D5DB;
+  --border-focus: #334155;
+
+  /* Typography Tokens */
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B7280;
+  --text-muted: #6B7280;
+  --text-disabled: #9CA3AF;
+
+  /* Brand & Accent Tokens (Restrained Slate / Deep Navy) */
+  --accent: #0F172A;
+  --accent-hover: #1E293B;
+  --accent-active: #334155;
+  --accent-subtle: #F1F5F9;
+
+  /* Status Tokens (Subtle borders / text accents only) */
+  --success: #166534;
+  --success-subtle: #F0FDF4;
+  --warning: #B45309;
+  --warning-subtle: #FFFBEB;
+  --danger: #991B1B;
+  --danger-subtle: #FEF2F2;
+
+  /* Radii (Consistent 4px and 6px) */
+  --radius-xs: 4px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 6px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}

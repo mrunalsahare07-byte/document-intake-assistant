@@ -1,0 +1,14 @@
+{
+  "proposal": {
+    "full_name": "Bruce Wayne",
+    "home_address": "100 Wayne Manor",
+    "covers_worldwide_assets": true,
+    "has_children": false,
+    "executor": {
+      "name": "Alfred Pennyworth",
+      "relationship": "butler"
+    }
+  },
+  "assistant_response": "Thank you, Bruce Wayne. Your details have been recorded.",
+  "requires_clarification": false
+}

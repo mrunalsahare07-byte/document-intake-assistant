@@ -1,0 +1,9 @@
+{
+  "proposal": {
+    "full_name": "Bruce Wayne",
+    "unexpected_field": "untrusted_payload",
+    "is_admin": true
+  },
+  "assistant_response": "Recording with unexpected fields.",
+  "requires_clarification": false
+}
